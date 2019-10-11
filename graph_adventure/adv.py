@@ -80,39 +80,6 @@ def dft(starting_vertex, graph):
     return traversalPath
 
 
-def bft(starting_vertex, graph):
-
-    qq = Queue()
-    visited = set()
-    path = []
-    traversalPath = []
-
-    qq.enqueue(starting_vertex)
-
-    while qq.size() > 0:
-        vertex = qq.dequeue()
-
-        if vertex not in visited:
-            path.append(vertex)
-            visited.add(vertex)
-
-            directions = "nwse"
-
-            for direction in directions:
-                if direction in graph[vertex][1]:
-                    qq.enqueue(graph[vertex][1][direction])
-
-    # Find the shortest path from i to i + 1
-    for i in range(len(path) - 1):
-        node_path = bfs(path[i], path[i + 1], graph)
-        directions_path = turn_path_into_directions(node_path, graph)
-        for direction in directions_path:
-            # Append path to traversalPath
-            traversalPath.append(direction)
-
-    return traversalPath
-
-
 def bfs(starting_vertex, destination_vertex, graph):
     queue = Queue()
     visited = set()
@@ -156,9 +123,6 @@ def turn_path_into_directions(path, graph):
 print("DFT")
 print(dft(0, roomGraph))
 print(len(dft(0, roomGraph)))
-print("BFT")
-print(bft(0, roomGraph))
-print(len(bft(0, roomGraph)))
 
 traversalPath = dft(0, roomGraph)
 
@@ -181,7 +145,7 @@ else:
 
 array = []
 
-for i in range(10000):
+for i in range(100000):
     traversalPath = dft(0, roomGraph)
     array.append(len(traversalPath))
 
